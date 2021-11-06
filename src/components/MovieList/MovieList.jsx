@@ -30,11 +30,12 @@ function MovieList() {
             payload: movie
         })
         history.push('/details')
-    }
+    }; // handleClick
 
 
     return (
         <main>
+
             <h1>MovieList</h1>
             <section className="movies">
                 {movies.map(movie => {
