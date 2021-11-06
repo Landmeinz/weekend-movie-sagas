@@ -18,7 +18,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-};
+}; // rootSaga
 
 // get all movies from the DB
 function* fetchAllMovies() {
@@ -30,7 +30,7 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }       
-}; // rootSaga
+}; // fetchAllMovies
 
 
 
@@ -77,7 +77,7 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={storeInstance}>
-        <App />
+            <App />
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
