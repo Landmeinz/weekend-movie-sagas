@@ -2,6 +2,11 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+// --- MUI --- //
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+
 function NavBar() {
 
     const history = useHistory();
@@ -27,14 +32,38 @@ function NavBar() {
     }; // handleClick
 
 
+
+    const sxButtonBox = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 200,
+
+    }
+
+    const sxButton = {
+        fontSize: 12,
+        fontWeight: 500,
+        lineHeight: 1.4,
+        m: 1,
+        
+        height: '30%',
+        width: '40%',
+    }
+
+
     return (
-        <div>
+        <Box sx={sxButtonBox}>
 
-            <button onClick={() => handleClick('movieList')}>HOME</button>
+            <Button variant="contained" sx={sxButton}
+                onClick={() => handleClick('movieList')}
+            >HOME</Button>
 
-            <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
+            <Button variant="contained" sx={sxButton} 
+                onClick={() => handleClick('addMovie')}
+            >ADD MOVIE</Button>
 
-        </div>
+        </Box>
     )
 }; // NavBar
 

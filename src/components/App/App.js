@@ -1,6 +1,5 @@
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
-import { useHistory } from 'react-router-dom';
 
 // components //
 import Header from '../Header/Header.jsx';
@@ -10,38 +9,55 @@ import DetailsPage from '../DetailsPage/DetailsPage.jsx';
 import AddMovie from '../AddMovie/AddMovie.jsx';
 
 // --- MUI --- //
-// import Paper from '@mui/material/Paper';
-// import Box from '@mui/material/Box';
-
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 function App() {
 
-  const history = useHistory();
+  const sxType = {
+    fontFamily: 'default',
+  }
+
+  const sxHeaderContainer = {
+    display: 'flex',
+    justifyContent: 'center',
+    height: 165,
+
+    border: 2,
+  }
 
   return (
     <div className="App">
 
-      <Header />
+      <Typography sx={sxType} mt={2}>
 
-      <Router>
-        
-        <NavBar />
 
-        <Route path="/" exact>
-          <MovieList />
-        </Route>
+        <Router>
+          <Container sx={sxHeaderContainer}>
+            <Header />
+            <NavBar />
+          </Container>
 
-        {/* Details page */}
-        <Route path="/details" >
-          <DetailsPage />
-        </Route>
+          <Route path="/" exact>
+            <MovieList />
+          </Route>
 
-        {/* Add Movie page */}
-        <Route path="/addMovie" >
-          <AddMovie />
-        </Route>
+          {/* Details page */}
+          <Route path="/details" >
+            <DetailsPage />
+          </Route>
 
-      </Router>
+          {/* Add Movie page */}
+          <Route path="/addMovie" >
+            <AddMovie />
+          </Route>
+
+        </Router>
+      </Typography>
 
     </div>
   );
