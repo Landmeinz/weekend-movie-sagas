@@ -14,6 +14,8 @@ function DetailsPage() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    // grab movies and genres from the store;
     const selectedMovie = useSelector(store => store.selectedMovie);
     const genres = useSelector(store => store.genres);
 
@@ -24,6 +26,7 @@ function DetailsPage() {
 
     // BUTTON to go back to the movie list or to the add movie form; 
     function handleClick(pageDirection) {
+
         switch (pageDirection) {
             case 'movieList':
                 console.log('CLICKED on movie list button');
@@ -34,18 +37,35 @@ function DetailsPage() {
                 console.log('CLICKED on movie list button');
                 history.push('/addMovie')
                 break;
-            
+
             default:
                 break;
         }
-        
-        // axios.get('/')
 
-    }
+    }; // handleClick
+
+
+    // axios({
+    //     method: 'GET',
+    //     url: '/api/genre'
+    // })
+    //     .then(response => {
+    //         console.log('GET /api/genre response', response);
+    //         dispatch({
+    //             type: 'GET_FEEDBACK',
+    //             payload: response.data
+    //         })
+    //     })
+    //     .catch(error => {
+    //         console.log('GET /api/genre ERROR', error);
+    //     });
+
 
     return (
 
         <div>
+            <h2>DetailsPage</h2>
+
             <button onClick={() => handleClick('movieList')}>MOVIE LIST</button>
 
             <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
@@ -61,7 +81,8 @@ function DetailsPage() {
                     m: .1,
                     width: 225,
                     height: 370,
-                }, }}>
+                },
+            }}>
 
                 <Paper elevation={2}>
                     <Box sx={{
@@ -86,29 +107,29 @@ function DetailsPage() {
             </Box>
 
             <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    '& > :not(style)': {
-                        p: 3,
-                        width: 550,
-                        height: 370,
-                    },
-                }}>
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                '& > :not(style)': {
+                    p: 3,
+                    width: 550,
+                    height: 370,
+                },
+            }}>
 
-                    <Paper elevation={2}>
+                <Paper elevation={2}>
 
-                        <h4>{selectedMovie.title}</h4>
-                        <p>{selectedMovie.description}</p>
-                        <p>{genres.name}</p>
+                    <h4>{selectedMovie.title}</h4>
+                    <p>{selectedMovie.description}</p>
+                    <p>{genres.name}</p>
 
-                    </Paper>
+                </Paper>
 
-                </Box>  
+            </Box>
 
         </div>
     )
-};
+}; // DetailsPage
 
 export default DetailsPage;

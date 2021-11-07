@@ -26,6 +26,7 @@ function MovieList() {
     // BUTTON to go back to the movie list or to the add movie form; 
     function handleClick(input, movie) {
         switch (input) {
+
             case 'dispatch':
                 console.log('CLICKED on the image');
                 console.log('this is the current image from handleClick', movie);
@@ -43,7 +44,7 @@ function MovieList() {
 
             default:
                 break;
-        }
+        }; // switch
 
         // axios.get('/')
 
@@ -53,7 +54,7 @@ function MovieList() {
     return (
         <main>
 
-            <h1>MovieList</h1>
+            <h2>MovieList</h2>
 
             <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
 
