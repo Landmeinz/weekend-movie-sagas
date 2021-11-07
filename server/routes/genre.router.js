@@ -3,15 +3,17 @@ const router = express.Router();
 const pool = require('../modules/pool')
 
 
-// GET genres; include the movie id in the query so we can display on DOM; 
-router.get('/', (req, res) => {
+// GET genres; include the movie id in the query so we can display their genres on the DOM; 
+router.get('/:id', (req, res) => {
   // Add query to get all genres
+  const movieId = req.params.id
 
   const queryText = `
-    SELECT 	"name", "movies_genres"."movie_id"
-    FROM 	  "genres"
-    JOIN 	  "movies_genres"
-    ON  	  "genres"."id" = "movies_genres"."genre_id"; ` ;
+  SELECT 	"name", "movies_genres"."movie_id"
+  FROM 	  "genres"
+  JOIN 	  "movies_genres"
+  ON  	  "genres"."id" = "movies_genres"."genre_id"
+  WHERE 	"movies_genres"."movie_id" = ${movieId};` ;
 
   pool.query(queryText)
     .then(result => {
