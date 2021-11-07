@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 
 function DetailsPage() {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const history = useHistory();
 
     // INVENTORY grab movies and genres from the store;
@@ -47,6 +47,18 @@ function DetailsPage() {
 
     // --- SX PROPERTIES --- //
 
+    const sxContainer = {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'none',
+        justifyContent: 'center',
+        alignItems: 'start',
+
+        '& > :not(style)': {
+            m: .5,
+        },
+    }; // sxContainer
+
     // box properties that holds our movie title and our image together; 
     const sxPoster = {
         display: 'flex',
@@ -55,13 +67,12 @@ function DetailsPage() {
         justifyContent: 'center',
 
         '& > :not(style)': {
-            m: 1,
             width: 225,
             height: 370,
         },
     }; // sxPoster
 
-    // box properties that holds our movie title info;
+    // box properties that holds our movie title size ;
     const sxHeader = {
         display: 'flex',
         justifyContent: 'center',
@@ -79,11 +90,13 @@ function DetailsPage() {
         justifyContent: 'center',
         alignItems: 'center',
         '& > :not(style)': {
-            p: 3,
+            p: 2,
             width: 550,
-            height: 370,
+            minHeight: 340,
+            maxHeight: '100%',
         },
     }; // sxDescription
+
 
 
     return (
@@ -95,39 +108,42 @@ function DetailsPage() {
 
             <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
 
-            <Box sx={sxPoster}>
-                <Paper elevation={2}>
+            <Box sx={sxContainer}>
+                <Box sx={sxPoster}>
+                    <Paper elevation={2}>
 
-                    <Box sx={sxHeader}>
-                        <h3>{selectedMovie.title}</h3>
-                    </Box>
+                        <Box sx={sxHeader}>
+                            <h3>{selectedMovie.title}</h3>
+                        </Box>
 
-                    <img
-                        src={selectedMovie.poster}
-                        alt={selectedMovie.title}
-                        width="200"
-                        height="275"
-                    />
+                        <img
+                            src={selectedMovie.poster}
+                            alt={selectedMovie.title}
+                            width="200"
+                            height="275"
+                        />
 
-                </Paper>
-            </Box>
+                    </Paper>
+                </Box>
 
-            <Box sx={sxDescription}>
+                <Box sx={sxDescription}>
 
-                <div>
-                    <h4>{selectedMovie.title}</h4>
+                    <Paper>
+                        <h4>{selectedMovie.title}</h4>
 
-                    {genres.map((genre) => (
-                        <p key={genre.movie_id}>{genre.name}</p>
-                    ))}
+                        <p>
+                            {genres.map((genre) => (
+                                <span key={genre.movie_id}>{genre.name}{genre.movie_id = genres.length-1 ? ',' : ''} </span>
+                            ))}
+                        </p>
 
-                    <p>{selectedMovie.description}</p>
-                   
+                        <p>{selectedMovie.description}</p>
                     
-                </div>
+                        
+                    </Paper>
 
+                </Box>
             </Box>
-
         </div>
     )
 }; // DetailsPage

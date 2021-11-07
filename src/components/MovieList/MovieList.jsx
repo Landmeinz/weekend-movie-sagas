@@ -76,9 +76,10 @@ function MovieList() {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        m: 'auto',
 
         '& > :not(style)': {
-            m: 1,
+            m: .5,
             width: 225,
             height: 370,
         },
