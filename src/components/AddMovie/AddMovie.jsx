@@ -3,6 +3,18 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
+// --- MUI --- //
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import NativeSelect from '@mui/material/NativeSelect';
+
+
 
 function AddMovie() {
 
@@ -68,45 +80,74 @@ function AddMovie() {
 
 
 
+    // --- SX PROPERTIES --- //
+
+
+    const sxFormBox = {
+        display: 'flex',
+        justifyContent: 'center',
+        height: 56,
+        m: 1,
+        gap: 1,
+    }
+
+    const sxButton = {
+        fontSize: 12,
+        fontWeight: 500,
+        lineHeight: 1.4,
+        width: 150,
+
+    }
+
+    const sxTextField = {
+        p: 'none',
+        width: 250,
+    }
+
+    const sxSelectGenre = {
+        fontSize: 12,
+        fontWeight: 500,
+        lineHeight: 1.4,
+        width: 150,
+
+    }
+
+
+
     return (
         <div>
-            <h2>AddMovie</h2>
-
-            <button onClick={() => handleClick('movieList')}>MOVIE LIST</button>
-
             <form onSubmit={handleSubmit}>
+                <Box sx={sxFormBox}>
+                    <Button variant="contained" sx={sxButton} type="submit">
+                        <SaveOutlinedIcon fontSize='large' />ADD TO WATCH LIST</Button>
 
-                <button type="submit">SAVE MOVIE</button>
+                    <TextField sx={sxTextField} id="outlined-basic" label="Title of Movie" variant="outlined" type="text"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                        required />
 
-                <input type="text"
-                    value={title}
-                    placeholder="Title of Movie"
-                    onChange={(event) => setTitle(event.target.value)}
-                    required />
+                    <TextField sx={sxTextField} id="outlined-basic" label="Poster Image URL" variant="outlined" type="text"
+                        value={poster}
+                        onChange={(event) => setPoster(event.target.value)}
+                        required />
 
-                <input type="text"
-                    value={poster}
-                    placeholder="Poster Image URL"
-                    onChange={(event) => setPoster(event.target.value)}
-                    required />
+                    <TextField sx={sxTextField} id="outlined-basic" label="Description" variant="outlined" type="text"
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        required />
 
-                <input type="text"
-                    value={description}
-                    placeholder="Description"
-                    onChange={(event) => setDescription(event.target.value)}
-                    required />
+                    <Select sx={sxSelectGenre} name="genre"
+                        value={genreInput}
+                        onChange={(event) => setGenreInput(event.target.value)} >
 
-                <select name="genre"
-                    value={genreInput}
-                    onChange={(event) => setGenreInput(event.target.value)} >
-
-                    <option hidden value="0">Select Genre</option>
-                    {allGenres.map((genre) => (
-                        <option
-                            key={genre.id}
-                        >{genre.name}</option>
-                    ))}
-                </select>
+                        <MenuItem hidden value="0">Select Genre</MenuItem>
+                        {allGenres.map((genre) => (
+                            <MenuItem
+                                key={genre.id}
+                            >{genre.name}</MenuItem>
+                        ))}
+                    </Select>
+                </Box>
 
             </form>
         </div>

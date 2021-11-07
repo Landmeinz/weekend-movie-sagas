@@ -20,54 +20,30 @@ function DetailsPage() {
     const genres = useSelector(store => store.genres);
 
 
-    // BUTTON to go back to the movie list or to the add movie form; 
-    function handleClick(pageDirection) {
-
-        switch (pageDirection) {
-            case 'movieList':
-                console.log('CLICKED on movie list button');
-                history.push('/')
-                break;
-
-            case 'addMovie':
-                console.log('CLICKED on movie list button');
-                history.push('/addMovie')
-                break;
-
-            default:
-                break;
-        }
-
-    }; // handleClick
-
-
 
     // --- SX PROPERTIES --- //
 
     const sxContainer = {
         display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'none',
-        justifyContent: 'center',
-        alignItems: 'start',
-
-        '& > :not(style)': {
-            m: .5,
-        },
-    }; // sxContainer
-
-    // box properties that holds our movie title and our image together; 
-    const sxPoster = {
-        display: 'flex',
-        flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
 
         '& > :not(style)': {
+            m: 1,
+        },
+    }; // sxContainer
+
+    // box properties that holds our movie title and our image together; 
+    const sxCard = {
+        textAlign: 'center',
+        m: .5,
+
+        '& > :not(style)': {
+            m: .5,
             width: 225,
             height: 370,
         },
-    }; // sxPoster
+    }; // sxCard
 
     // box properties that holds our movie title size ;
     const sxHeader = {
@@ -94,31 +70,50 @@ function DetailsPage() {
         },
     }; // sxDescription
 
+    // box properties that holds our image;
+    const sxImageBox = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }; // sxImageBox
 
+    // box container that holds the movie title and genres next to each other; 
+    const sxTitleGenreContainer = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        border: 1,
+        borderRadius: 1, 
+
+
+    }; // sxTitleGenreContainer
+
+    // box that holds the movie title above the description;
+    const sxTitle = {
+
+        fontSize: 20,
+        fontWeight: 700,
+        mr: 4,
+    }; // sxTitle
 
     return (
 
         <div>
-            <h2>DetailsPage</h2>
-
-            <button onClick={() => handleClick('movieList')}>MOVIE LIST</button>
-
-            <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
-
             <Box sx={sxContainer}>
-                <Box sx={sxPoster}>
+                <Box sx={sxCard}>
                     <Paper elevation={2}>
 
                         <Box sx={sxHeader}>
                             <h3>{selectedMovie.title}</h3>
                         </Box>
 
-                        <img
-                            src={selectedMovie.poster}
-                            alt={selectedMovie.title}
-                            width="200"
-                            height="275"
-                        />
+                        <Box sx={sxImageBox}>
+                            <img
+                                src={selectedMovie.poster}
+                                alt={selectedMovie.title}
+                                width="200"
+                                height="275" />
+                        </Box>
 
                     </Paper>
                 </Box>
@@ -126,22 +121,24 @@ function DetailsPage() {
                 <Box sx={sxDescription}>
 
                     <Paper>
-                        <h4>{selectedMovie.title}</h4>
+                        <Box sx={sxTitleGenreContainer}>
 
-                        <p>
-                            {genres.map((genre) => (
-                                <span key={genre.movie_id}>{genre.name}{genre.movie_id = genres.length-1 ? ',' : ''} </span>
-                            ))}
-                        </p>
+                            <Box sx={sxTitle}>{selectedMovie.title}</Box>
+
+                            <p>
+                                {genres.map((genre) => (
+                                    <span key={genre.movie_id}>{genre.name}{genre.movie_id = genres.length - 1 ? ',' : ''} </span>
+                                ))}
+                            </p>
+                        </Box>
 
                         <p>{selectedMovie.description}</p>
-                    
-                        
+
                     </Paper>
 
                 </Box>
             </Box>
-        </div>
+        </div >
     )
 }; // DetailsPage
 

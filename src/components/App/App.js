@@ -1,52 +1,78 @@
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
-import { useHistory } from 'react-router-dom';
 
 // components //
-import Header from '../Header/Header.jsx'
-import MovieList from '../MovieList/MovieList'
-import DetailsPage from '../DetailsPage/DetailsPage.jsx'
-import AddMovie from '../AddMovie/AddMovie.jsx'
+import Header from '../Header/Header.jsx';
+import NavBar from '../NavBar/NavBar.jsx';
+import MovieList from '../MovieList/MovieList';
+import DetailsPage from '../DetailsPage/DetailsPage.jsx';
+import AddMovie from '../AddMovie/AddMovie.jsx';
 
 // --- MUI --- //
-// import Paper from '@mui/material/Paper';
-// import Box from '@mui/material/Box';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 function App() {
 
-  const history = useHistory();
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: 'hsla(360, 70%, 50%, .9)',
+      },
+      secondary: {
+        main: 'hsla(360, 50%, 50%, .9)',
+      },
+    },
+  });
+
+  const sxType = {
+    fontFamily: 'default',
+  }
+
+  const sxHeaderContainer = {
+    display: 'flex',
+    justifyContent: 'center',
+    height: 165,
+
+    // border: 2,
+  }
 
   return (
     <div className="App">
 
-      <Header />
+      <ThemeProvider theme={theme}>
+        <Typography sx={sxType} mt={2}>
 
-      <Router>
 
-        {/* <nav>
-          <Link to="/">HOME</Link>
-          <Link> </Link>
-          <Link to="/details">DETAILS</Link>
-          <Link> </Link>
-          <Link to="/addMovie">ADD</Link>
-        </nav> */}
+          <Router>
+            <Container sx={sxHeaderContainer}>
+              <Header />
+              <NavBar />
+            </Container>
 
-        <Route path="/" exact>
-          <MovieList />
-        </Route>
+            <Route path="/" exact>
+              <MovieList />
+            </Route>
 
-        {/* Details page */}
-        <Route path="/details" >
-          <DetailsPage />
-        </Route>
+            {/* Details page */}
+            <Route path="/details" >
+              <DetailsPage />
+            </Route>
 
-        {/* Add Movie page */}
-        <Route path="/addMovie" >
-          <AddMovie />
-        </Route>
+            {/* Add Movie page */}
+            <Route path="/addMovie" >
+              <AddMovie />
+            </Route>
 
-      </Router>
+          </Router>
+        </Typography>
+      </ThemeProvider>
 
     </div>
   );
