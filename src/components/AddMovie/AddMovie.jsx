@@ -38,36 +38,59 @@ function AddMovie() {
         console.log('CLICKED on submit new movie');
         event.preventDefault();
 
+        // make sure genre gets selected before sending off the post; 
         if(genreInput != '0'){
-            console.log('selected', genreInput);
 
             // --- post to database from here --- //
 
-        } else {
-            alert('remember to select a genre')
-        }        
-    }
+
+            // empty all back to default values after submit; 
+            setTitle('')
+            setUrl('')
+            setDescription('');
+            setGenreInput('0');
+            
+        } else {alert('remember to select a genre')}        
+    }; // handleSubmit
 
     
-
+<input type="text" value={name} 
+             onChange={(evt) => setName(evt.target.value)} />
 
     // add a form to the page that takes inputs for title, poster, and description;
 
     return (
         <div>
             <h2>AddMovie</h2>
+
             <button onClick={() => handleClick('movieList')}>MOVIE LIST</button>
-            <p>add a new movie on this page</p>
 
             <form onSubmit={handleSubmit}>
+
                 <button type="submit">ADD MOVIE</button>
-                <input type="text" placeholder="Title of movie" required />
-                <input type="text" placeholder="Image URL" required />
-                <input type="text" placeholder="description" required />
+
+                <input type="text" 
+                    value={title} 
+                    placeholder="Title of Movie" 
+                    onChange={(event) => setTitle(event.target.value)}
+                    required />
+
+                <input type="text" 
+                    value={url} 
+                    placeholder="Poster Image URL" 
+                    onChange={(event) => setUrl(event.target.value)}
+                    required />
+
+                <input type="text" 
+                    value={description} 
+                    placeholder="Description" 
+                    onChange={(event) => setDescription(event.target.value)}
+                    required />
                 
-                <select 
+                <select name="genre"
                     value={genreInput}
                     onChange={(event) => setGenreInput(event.target.value)} >
+
                     <option hidden value="0">Select Genre</option>
                     {genres.map((genre, i) => (
                         <option 
@@ -77,7 +100,6 @@ function AddMovie() {
                 </select>
 
             </form>
-
         </div>
     )
 }; // AddMovie
