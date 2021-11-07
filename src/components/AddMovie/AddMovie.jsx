@@ -70,10 +70,6 @@ function AddMovie() {
 
     return (
         <div>
-            <h2>AddMovie</h2>
-
-            <button onClick={() => handleClick('movieList')}>MOVIE LIST</button>
-
             <form onSubmit={handleSubmit}>
 
                 <button type="submit">SAVE MOVIE</button>

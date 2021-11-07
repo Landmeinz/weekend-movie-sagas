@@ -55,11 +55,6 @@ function MovieList() {
                 history.push('/details');
                 break;
 
-            case 'addMovie':
-                console.log('CLICKED on movie list button');
-                history.push('/addMovie');
-                break;
-
             default:
                 break;
         }; // switch
@@ -99,11 +94,6 @@ function MovieList() {
 
     return (
         <main>
-
-            <h2>MovieList</h2>
-
-            <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
-
             <section className="movies">
                 {movies.map(movie => {
                     return (

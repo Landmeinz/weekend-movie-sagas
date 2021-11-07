@@ -20,28 +20,7 @@ function DetailsPage() {
     const genres = useSelector(store => store.genres);
 
 
-    // BUTTON to go back to the movie list or to the add movie form; 
-    function handleClick(pageDirection) {
-
-        switch (pageDirection) {
-            case 'movieList':
-                console.log('CLICKED on movie list button');
-                history.push('/')
-                break;
-
-            case 'addMovie':
-                console.log('CLICKED on movie list button');
-                history.push('/addMovie')
-                break;
-
-            default:
-                break;
-        }
-
-    }; // handleClick
-
-
-
+    
     // --- SX PROPERTIES --- //
 
     const sxContainer = {
@@ -99,12 +78,6 @@ function DetailsPage() {
     return (
 
         <div>
-            <h2>DetailsPage</h2>
-
-            <button onClick={() => handleClick('movieList')}>MOVIE LIST</button>
-
-            <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
-
             <Box sx={sxContainer}>
                 <Box sx={sxPoster}>
                     <Paper elevation={2}>
