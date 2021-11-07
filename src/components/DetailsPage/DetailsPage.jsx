@@ -14,13 +14,10 @@ function DetailsPage() {
     // const dispatch = useDispatch();
     const history = useHistory();
 
+
     // INVENTORY grab movies and genres from the store;
     const selectedMovie = useSelector(store => store.selectedMovie);
     const genres = useSelector(store => store.genres);
-
-
-    console.log('--- the genres', genres);
-    console.log('this is selectedMovie', selectedMovie);
 
 
     // BUTTON to go back to the movie list or to the add movie form; 

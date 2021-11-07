@@ -1,17 +1,25 @@
 
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function AddMovie() {
 
-    let genres = useSelector(store => store.genres);
+    let allGenres = useSelector(store => store.allGenres);
 
     // --- !!! DELETE ME !!! --- // 
-    genres = ['Adventure', 'Animated', 'Biographical', 'Comedy', 'Disaster', 'Drama', 'Epic', 'Fantasy', 'Musical', 'Romantic', 'Science Fiction', 'Space-Opera', 'Superhero']
+    // genres = ['Adventure', 'Animated', 'Biographical', 'Comedy', 'Disaster', 'Drama', 'Epic', 'Fantasy', 'Musical', 'Romantic', 'Science Fiction', 'Space-Opera', 'Superhero']
 
+    const dispatch = useDispatch();
     const history = useHistory();
+
+
+    // get all genres for our drop down selection on page load; 
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GENRES' });
+    }, []);
+
 
     // BUTTON to go back to the movie list; 
     function handleClick(value) {
@@ -39,7 +47,7 @@ function AddMovie() {
         event.preventDefault();
 
         // make sure genre gets selected before sending off the post; 
-        if(genreInput != '0'){
+        if (genreInput != '0') {
 
             // --- post to database from here --- //
 
@@ -48,15 +56,18 @@ function AddMovie() {
             setUrl('')
             setDescription('');
             setGenreInput('0');
-            
-        } else {alert('remember to select a genre')}        
+
+        } else { alert('remember to select a genre') }
     }; // handleSubmit
 
-    
-<input type="text" value={name} 
-             onChange={(evt) => setName(evt.target.value)} />
+
+    // <input type="text" value={name} 
+    //          onChange={(evt) => setName(evt.target.value)} />
 
     // add a form to the page that takes inputs for title, poster, and description;
+
+    console.log('THIS SHOULD BE ALL GENRES', allGenres);
+
 
     return (
         <div>
@@ -68,33 +79,33 @@ function AddMovie() {
 
                 <button type="submit">ADD MOVIE</button>
 
-                <input type="text" 
-                    value={title} 
-                    placeholder="Title of Movie" 
+                <input type="text"
+                    value={title}
+                    placeholder="Title of Movie"
                     onChange={(event) => setTitle(event.target.value)}
                     required />
 
-                <input type="text" 
-                    value={url} 
-                    placeholder="Poster Image URL" 
+                <input type="text"
+                    value={url}
+                    placeholder="Poster Image URL"
                     onChange={(event) => setUrl(event.target.value)}
                     required />
 
-                <input type="text" 
-                    value={description} 
-                    placeholder="Description" 
+                <input type="text"
+                    value={description}
+                    placeholder="Description"
                     onChange={(event) => setDescription(event.target.value)}
                     required />
-                
+
                 <select name="genre"
                     value={genreInput}
                     onChange={(event) => setGenreInput(event.target.value)} >
 
                     <option hidden value="0">Select Genre</option>
-                    {genres.map((genre, i) => (
-                        <option 
-                            key={i}
-                        >{genre}</option>
+                    {allGenres.map((genre) => (
+                        <option
+                            key={genre.id}
+                        >{genre.name}</option>
                     ))}
                 </select>
 
