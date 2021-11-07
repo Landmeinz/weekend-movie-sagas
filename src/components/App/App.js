@@ -23,13 +23,13 @@ function App() {
 
       <Router>
 
-        <nav>
+        {/* <nav>
           <Link to="/">HOME</Link>
           <Link> </Link>
           <Link to="/details">DETAILS</Link>
           <Link> </Link>
           <Link to="/addMovie">ADD</Link>
-        </nav>
+        </nav> */}
 
         <Route path="/" exact>
           <MovieList />
@@ -37,7 +37,7 @@ function App() {
 
         {/* Details page */}
         <Route path="/details" >
-            <DetailsPage />
+          <DetailsPage />
         </Route>
 
         {/* Add Movie page */}

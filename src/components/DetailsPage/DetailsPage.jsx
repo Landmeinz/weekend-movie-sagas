@@ -1,6 +1,7 @@
 
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 // --- COMPONENTS --- // 
 
@@ -11,15 +12,19 @@ import Box from '@mui/material/Box';
 
 function DetailsPage() {
 
+    const dispatch = useDispatch();
     const history = useHistory();
     const selectedMovie = useSelector(store => store.selectedMovie);
+    const genres = useSelector(store => store.genres);
+
+    console.log('--- the genres', genres);
 
     console.log('this is selectedMovie', selectedMovie);
 
 
-    // BUTTON to go back to the movie list; 
-    function handleClick(value) {
-        switch (value) {
+    // BUTTON to go back to the movie list or to the add movie form; 
+    function handleClick(pageDirection) {
+        switch (pageDirection) {
             case 'movieList':
                 console.log('CLICKED on movie list button');
                 history.push('/')
@@ -33,6 +38,9 @@ function DetailsPage() {
             default:
                 break;
         }
+        
+        // axios.get('/')
+
     }
 
     return (
@@ -93,7 +101,7 @@ function DetailsPage() {
 
                         <h4>{selectedMovie.title}</h4>
                         <p>{selectedMovie.description}</p>
-                        <p>other info here</p>
+                        <p>{genres.name}</p>
 
                     </Paper>
 

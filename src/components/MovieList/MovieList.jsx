@@ -22,14 +22,31 @@ function MovieList() {
     }, []);
 
 
-    function handleClick(movie) {
-        console.log('CLICKED on the image');
-        console.log('this is the current image from handleClick', movie);
-        dispatch({
-            type: 'SET_SELECTED_MOVIE',
-            payload: movie
-        })
-        history.push('/details')
+
+    // BUTTON to go back to the movie list or to the add movie form; 
+    function handleClick(input, movie) {
+        switch (input) {
+            case 'dispatch':
+                console.log('CLICKED on the image');
+                console.log('this is the current image from handleClick', movie);
+                dispatch({
+                    type: 'SET_SELECTED_MOVIE',
+                    payload: movie
+                });
+                history.push('/details');
+                break;
+
+            case 'addMovie':
+                console.log('CLICKED on movie list button');
+                history.push('/addMovie');
+                break;
+
+            default:
+                break;
+        }
+
+        // axios.get('/')
+
     }; // handleClick
 
 
@@ -37,12 +54,15 @@ function MovieList() {
         <main>
 
             <h1>MovieList</h1>
+
+            <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
+
             <section className="movies">
                 {movies.map(movie => {
                     return (
                         <Box sx={{
                             display: 'flex',
-                            flexDirection: 'row', 
+                            flexDirection: 'row',
                             flexWrap: 'wrap',
                             justifyContent: 'center',
 
@@ -50,14 +70,15 @@ function MovieList() {
                                 m: 1,
                                 width: 225,
                                 height: 370,
-                            }, }}>
+                            },
+                        }}>
 
-                            <Paper 
+                            <Paper
                                 elevation={2}
                                 key={movie.id}
-                                onClick={() => handleClick(movie)}
+                                onClick={() => handleClick('dispatch', movie)}
                                 style={{ cursor: 'pointer' }} >
-                                
+
                                 <Box sx={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -65,14 +86,15 @@ function MovieList() {
                                     '& > :not(style)': {
                                         height: 35,
                                         p: .5,
-                                    }, }}>
+                                    },
+                                }}>
 
                                     <h3>{movie.title}</h3>
                                 </Box>
-                                
-                                <img 
-                                    src={movie.poster} 
-                                    alt={movie.title} 
+
+                                <img
+                                    src={movie.poster}
+                                    alt={movie.title}
                                     width="200"
                                     height="275" />
                             </Paper>

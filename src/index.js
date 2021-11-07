@@ -18,6 +18,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_GENRES', fetchAllGenres);
 }; // rootSaga
 
 // get all movies from the DB
@@ -25,6 +26,7 @@ function* fetchAllMovies() {
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
+        
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
@@ -32,10 +34,21 @@ function* fetchAllMovies() {
     }       
 }; // fetchAllMovies
 
+// get all genres with movie id from the DB;
+function* fetchAllGenres(action) {
+    console.log('THIS IS THE ACTION', action);
+    
+    try {
+        const genres = yield axios.get('/api/genre');
+        console.log('-------get all:', genres.data);
+        yield put({ type: 'SET_GENRES', payload: genres.data });
+
+    } catch {
+        console.log('get all error');
+    }       
+}; // fetchAllMovies
 
 
-// Create sagaMiddleware
-const sagaMiddleware = createSagaMiddleware();
 
 // --- REDUCERS --- //
 
@@ -50,9 +63,10 @@ const movies = (state = [], action) => {
 }; // sagaMiddleware
 
 // Used to store the movie genres
-const genres = (state = [], action) => {
+const genres = (state = [], action) => {    
     switch (action.type) {
         case 'SET_GENRES':
+            console.log('this is the genres action.payload', action.payload);
             return action.payload;
         default:
             return state;
@@ -63,14 +77,14 @@ const selectedMovie = (state=[], action) => {
     switch (action.type) {
         case 'SET_SELECTED_MOVIE' :
             console.log('this is action.payload of selectedMovie', selectedMovie);
-            
             return action.payload
         default :
             return state; 
     }
 }; // selectedMovie
 
-
+// Create sagaMiddleware
+const sagaMiddleware = createSagaMiddleware();
 
 // Create one store that all components can use
 const storeInstance = createStore(

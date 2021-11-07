@@ -12,9 +12,10 @@ router.get('/', (req, res) => {
     FROM 	  "genres"
     JOIN 	  "movies_genres"
     ON  	  "genres"."id" = "movies_genres"."genre_id"; ` ;
-  
+
   pool.query(queryText)
     .then(result => {
+      console.log('the pool.query result GET genres', result.rows);
       res.send(result.rows);
     })
     .catch(err => {
