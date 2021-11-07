@@ -3,9 +3,10 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // --- MUI --- //
-import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import LocalMoviesOutlinedIcon from '@mui/icons-material/LocalMoviesOutlined';
+import LibraryAddCheckOutlinedIcon from '@mui/icons-material/LibraryAddCheckOutlined';
 
 function NavBar() {
 
@@ -37,7 +38,7 @@ function NavBar() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 200,
+        width: 300,
 
     }
 
@@ -46,9 +47,7 @@ function NavBar() {
         fontWeight: 500,
         lineHeight: 1.4,
         m: 1,
-        
-        height: '30%',
-        width: '40%',
+
     }
 
 
@@ -57,11 +56,11 @@ function NavBar() {
 
             <Button variant="contained" sx={sxButton}
                 onClick={() => handleClick('movieList')}
-            >HOME</Button>
+            ><LocalMoviesOutlinedIcon fontSize='large'/>WATCH LIST</Button>
 
-            <Button variant="contained" sx={sxButton} 
+            <Button variant="contained" sx={sxButton}
                 onClick={() => handleClick('addMovie')}
-            >ADD MOVIE</Button>
+            ><LibraryAddCheckOutlinedIcon fontSize='large'/>ADD NEW MOVIE</Button>
 
         </Box>
     )

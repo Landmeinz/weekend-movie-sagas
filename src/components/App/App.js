@@ -15,8 +15,21 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 function App() {
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: 'hsla(360, 70%, 50%, .9)',
+      },
+      secondary: {
+        main: 'hsla(360, 50%, 50%, .9)',
+      },
+    },
+  });
 
   const sxType = {
     fontFamily: 'default',
@@ -27,37 +40,39 @@ function App() {
     justifyContent: 'center',
     height: 165,
 
-    border: 2,
+    // border: 2,
   }
 
   return (
     <div className="App">
 
-      <Typography sx={sxType} mt={2}>
+      <ThemeProvider theme={theme}>
+        <Typography sx={sxType} mt={2}>
 
 
-        <Router>
-          <Container sx={sxHeaderContainer}>
-            <Header />
-            <NavBar />
-          </Container>
+          <Router>
+            <Container sx={sxHeaderContainer}>
+              <Header />
+              <NavBar />
+            </Container>
 
-          <Route path="/" exact>
-            <MovieList />
-          </Route>
+            <Route path="/" exact>
+              <MovieList />
+            </Route>
 
-          {/* Details page */}
-          <Route path="/details" >
-            <DetailsPage />
-          </Route>
+            {/* Details page */}
+            <Route path="/details" >
+              <DetailsPage />
+            </Route>
 
-          {/* Add Movie page */}
-          <Route path="/addMovie" >
-            <AddMovie />
-          </Route>
+            {/* Add Movie page */}
+            <Route path="/addMovie" >
+              <AddMovie />
+            </Route>
 
-        </Router>
-      </Typography>
+          </Router>
+        </Typography>
+      </ThemeProvider>
 
     </div>
   );

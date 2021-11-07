@@ -8,6 +8,7 @@ import './MovieList.css'
 // --- MUI --- //
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 function MovieList() {
 
@@ -42,7 +43,7 @@ function MovieList() {
                     .then(response => {
                         console.log('GET /api/genre response', response);
                         dispatch({
-                            type:    'SET_GENRES',
+                            type: 'SET_GENRES',
                             payload: response.data
                         })
                     })
@@ -63,20 +64,28 @@ function MovieList() {
 
     // --- SX PROPERTIES --- //
 
-    // box properties that holds our movie title and our image together; 
-    const sxPoster = {
+    const sxContainerBox = {
         display: 'flex',
-        flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        m: 'auto',
+    }
+
+    // box properties that holds our movie title and our image together; 
+    const sxCard = {
+        m: .5,
+        cursor: 'pointer',
 
         '& > :not(style)': {
             m: .5,
             width: 225,
             height: 370,
         },
-    }; // sxPoster
+        
+        '&:hover': {
+            borderRadius: 2,
+            background: 'hsla(360, 70%, 50%, .9)',
+        }
+    }; // sxCard
 
     // box properties that holds our movie title info;
     const sxHeader = {
@@ -89,36 +98,44 @@ function MovieList() {
         },
     }; // sxHeader
 
+    // box properties that holds our image;
+    const sxImageBox = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }; // sxImageBox
+
 
     return (
         <main>
-            <section className="movies">
+            <Box sx={sxContainerBox} >
                 {movies.map(movie => {
                     return (
-                        <Box sx={sxPoster}>
+                        <Box sx={sxCard}>
                             <Paper
                                 elevation={2}
                                 key={movie.id}
-                                onClick={() => handleClick('dispatch', movie)}
-                                style={{ cursor: 'pointer' }} >
+                                onClick={() => handleClick('dispatch', movie)}>
 
                                 <Box sx={sxHeader}>
                                     <h3>{movie.title}</h3>
                                 </Box>
 
-                                <img
-                                    src={movie.poster}
-                                    alt={movie.title}
-                                    width="200"
-                                    height="275"
-                                />
+                                <Box sx={sxImageBox}>
+                                    <img
+                                        src={movie.poster}
+                                        alt={movie.title}
+                                        width="200"
+                                        height="275"
+                                    />
+                                </Box>
 
                             </Paper>
                         </Box>
                     );
                 })}
-            </section>
-        </main>
+            </Box>
+        </main >
     );
 }
 

@@ -14,7 +14,7 @@ function Header() {
 
         fontSize: 40,
         fontWeight: 700,
-        m: 1,
+        mr: 4,
     }
 
     return (
