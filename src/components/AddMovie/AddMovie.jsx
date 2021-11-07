@@ -1,6 +1,7 @@
 
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 
 function AddMovie() {
@@ -25,9 +26,29 @@ function AddMovie() {
         }
     }; // handleClick
 
-    function handleSubmit() {
+
+    const [title, setTitle] = useState('')
+    const [url, setUrl] = useState('')
+    const [description, setDescription] = useState('')
+    const [genreInput, setGenreInput] = useState('0')
+
+
+    // BUTTON to ADD MOVIE and post to the database; 
+    function handleSubmit(event) {
         console.log('CLICKED on submit new movie');
+        event.preventDefault();
+
+        if(genreInput != '0'){
+            console.log('selected', genreInput);
+
+            // --- post to database from here --- //
+
+        } else {
+            alert('remember to select a genre')
+        }        
     }
+
+    
 
 
     // add a form to the page that takes inputs for title, poster, and description;
@@ -40,15 +61,21 @@ function AddMovie() {
 
             <form onSubmit={handleSubmit}>
                 <button type="submit">ADD MOVIE</button>
-                <input type="text" placeholder="Title of movie"/>
-                <input type="text" placeholder="Image URL"/>
-                <input type="text" placeholder="description"/>
-                <select name="genres">
-                    <option hidden>Select Genre</option>
+                <input type="text" placeholder="Title of movie" required />
+                <input type="text" placeholder="Image URL" required />
+                <input type="text" placeholder="description" required />
+                
+                <select 
+                    value={genreInput}
+                    onChange={(event) => setGenreInput(event.target.value)} >
+                    <option hidden value="0">Select Genre</option>
                     {genres.map((genre, i) => (
-                        <option key={i}>{genre}</option>
+                        <option 
+                            key={i}
+                        >{genre}</option>
                     ))}
                 </select>
+
             </form>
 
         </div>
