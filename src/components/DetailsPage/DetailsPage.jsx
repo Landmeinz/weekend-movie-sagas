@@ -35,6 +35,7 @@ function DetailsPage() {
 
     // box properties that holds our movie title and our image together; 
     const sxCard = {
+        textAlign: 'center',
         m: .5,
 
         '& > :not(style)': {

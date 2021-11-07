@@ -86,21 +86,21 @@ function AddMovie() {
     const sxFormBox = {
         display: 'flex',
         justifyContent: 'center',
-        height: 10,
-        m: 2,
+        height: 56,
+        m: 1,
+        gap: 1,
     }
 
     const sxButton = {
         fontSize: 12,
         fontWeight: 500,
         lineHeight: 1.4,
-        m: 1,
         width: 150,
 
     }
 
     const sxTextField = {
-        m: 1,
+        p: 'none',
         width: 250,
     }
 
@@ -109,6 +109,7 @@ function AddMovie() {
         fontWeight: 500,
         lineHeight: 1.4,
         width: 150,
+
     }
 
 

@@ -72,6 +72,7 @@ function MovieList() {
 
     // box properties that holds our movie title and our image together; 
     const sxCard = {
+        textAlign: 'center',
         m: .5,
         cursor: 'pointer',
 
@@ -80,7 +81,7 @@ function MovieList() {
             width: 225,
             height: 370,
         },
-        
+
         '&:hover': {
             borderRadius: 2,
             background: 'hsla(360, 70%, 50%, .9)',
