@@ -6,10 +6,8 @@ import { useState, useEffect } from 'react';
 
 function AddMovie() {
 
+    // INVENTORY grab ALL the genres from the store;
     let allGenres = useSelector(store => store.allGenres);
-
-    // --- !!! DELETE ME !!! --- // 
-    // genres = ['Adventure', 'Animated', 'Biographical', 'Comedy', 'Disaster', 'Drama', 'Epic', 'Fantasy', 'Musical', 'Romantic', 'Science Fiction', 'Space-Opera', 'Superhero']
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -36,7 +34,7 @@ function AddMovie() {
 
 
     const [title, setTitle] = useState('')
-    const [url, setUrl] = useState('')
+    const [poster, setPoster] = useState('')
     const [description, setDescription] = useState('')
     const [genreInput, setGenreInput] = useState('0')
 
@@ -46,27 +44,28 @@ function AddMovie() {
         console.log('CLICKED on add movie');
         event.preventDefault();
 
+
         // make sure genre gets selected before sending off the post; 
         if (genreInput != '0') {
 
-            // --- post to database from here --- //
+            // --- dispatch a call to SAGA from here --- //
+            dispatch({
+                type: 'ADD_MOVIE',
+                payload: { title, poster, description }
+            });
 
             // empty all back to default values after submit; 
             setTitle('')
-            setUrl('')
+            setPoster('')
             setDescription('');
             setGenreInput('0');
+
+            // direct the user back to the main page to see the new list of movies
+            history.push('/')
 
         } else { alert('remember to select a genre') }
     }; // handleSubmit
 
-
-    // <input type="text" value={name} 
-    //          onChange={(evt) => setName(evt.target.value)} />
-
-    // add a form to the page that takes inputs for title, poster, and description;
-
-    console.log('THIS SHOULD BE ALL GENRES', allGenres);
 
 
     return (
@@ -77,7 +76,7 @@ function AddMovie() {
 
             <form onSubmit={handleSubmit}>
 
-                <button type="submit">ADD MOVIE</button>
+                <button type="submit">SAVE MOVIE</button>
 
                 <input type="text"
                     value={title}
@@ -86,9 +85,9 @@ function AddMovie() {
                     required />
 
                 <input type="text"
-                    value={url}
+                    value={poster}
                     placeholder="Poster Image URL"
-                    onChange={(event) => setUrl(event.target.value)}
+                    onChange={(event) => setPoster(event.target.value)}
                     required />
 
                 <input type="text"

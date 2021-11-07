@@ -19,27 +19,27 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES', fetchAllGenres);
+    yield takeEvery('ADD_MOVIE', addMovie);
 }; // rootSaga
 
 
-// get all movies from the DB
+// GET all movies from the DB
 function* fetchAllMovies() {
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
-        
         yield put({ type: 'SET_MOVIES', payload: movies.data });
 
     } catch {
         console.log('get all error');
-    }       
+    }
 }; // fetchAllMovies
 
 
-// get all genres with movie id from the DB;
+// GET all genres with movie id from the DB;
 function* fetchAllGenres(action) {
     console.log('THIS IS THE ACTION', action);
-    
+
     try {
         const response = yield axios.get('/api/genre');
         console.log('-------get all:', genres.data);
@@ -47,8 +47,21 @@ function* fetchAllGenres(action) {
 
     } catch {
         console.log('fetchAllGenres GET all genre error');
-    }       
+    }
 }; // fetchAllMovies
+
+
+// POST new pet to server, then GET pet data
+function* addMovie(action) {
+    console.log('trying to addMovie here', action.paylod);
+    
+    try {
+        yield axios.post('/api/movie', action.payload);
+        yield put({ type: 'FETCH_MOVIES' });
+    } catch (err) {
+        console.log('addMovie error', err);
+    }
+}; // addMovie
 
 
 
@@ -65,10 +78,10 @@ const movies = (state = [], action) => {
 }; // sagaMiddleware
 
 // Used to store the movie genres
-const genres = (state = [], action) => {    
+const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
-            console.log('this is the SELECTED genres action.payload', action.payload);
+            // console.log('this is the SELECTED genres action.payload', action.payload);
             return action.payload;
 
         default:
@@ -76,10 +89,10 @@ const genres = (state = [], action) => {
     }
 }; // genres
 
-const allGenres = (state=[], action) => {
+const allGenres = (state = [], action) => {
     switch (action.type) {
         case 'ALL_GENRES':
-            console.log('this is the ALL genres action.payload', action.payload);
+            // console.log('this is the ALL genres action.payload', action.payload);
             return action.payload;
 
         default:
@@ -87,13 +100,13 @@ const allGenres = (state=[], action) => {
     }
 }; // allGenres
 
-const selectedMovie = (state=[], action) => {
+const selectedMovie = (state = [], action) => {
     switch (action.type) {
-        case 'SET_SELECTED_MOVIE' :
+        case 'SET_SELECTED_MOVIE':
             console.log('this is action.payload of selectedMovie', selectedMovie);
             return action.payload
-        default :
-            return state; 
+        default:
+            return state;
     }
 }; // selectedMovie
 

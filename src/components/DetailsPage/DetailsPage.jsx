@@ -15,7 +15,7 @@ function DetailsPage() {
     const history = useHistory();
 
 
-    // INVENTORY grab movies and genres from the store;
+    // INVENTORY grab ALL movies and the SELECTED genres from the store;
     const selectedMovie = useSelector(store => store.selectedMovie);
     const genres = useSelector(store => store.genres);
 

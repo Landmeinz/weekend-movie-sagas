@@ -27,8 +27,8 @@ function MovieList() {
 
     // BUTTONS to go back to the movie list or to the add movie form; 
     function handleClick(input, movie) {
-        switch (input) {
 
+        switch (input) {
             case 'dispatch':
                 console.log('CLICKED on the image');
                 console.log('this is the current image from handleClick', movie);
