@@ -3,6 +3,7 @@ import './App.css';
 import { useHistory } from 'react-router-dom';
 
 // components //
+import Header from '../Header/Header.jsx'
 import MovieList from '../MovieList/MovieList'
 import DetailsPage from '../DetailsPage/DetailsPage.jsx'
 import AddMovie from '../AddMovie/AddMovie.jsx'
@@ -19,7 +20,7 @@ function App() {
   return (
     <div className="App">
 
-      <h1>The Movies Saga!</h1>
+      <Header />
 
       <Router>
 

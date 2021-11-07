@@ -114,7 +114,7 @@ function DetailsPage() {
 
             <Box sx={sxDescription}>
 
-                <Paper elevation={2}>
+                <div>
                     <h4>{selectedMovie.title}</h4>
 
                     {genres.map((genre) => (
@@ -124,7 +124,7 @@ function DetailsPage() {
                     <p>{selectedMovie.description}</p>
                    
                     
-                </Paper>
+                </div>
 
             </Box>
 
