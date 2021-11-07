@@ -51,7 +51,7 @@ function* fetchAllGenres(action) {
 }; // fetchAllMovies
 
 
-// POST new pet to server, then GET pet data
+// POST new movie to server, then FETCH all movies;
 function* addMovie(action) {
     console.log('trying to addMovie here', action.paylod);
     

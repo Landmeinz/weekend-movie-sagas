@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 // POST new movie; 
 router.post('/', (req, res) => {
   console.log(req.body);
-  
+
   // RETURNING "id" will give us back the id of the created movie
   const insertMovieQuery = `
     INSERT INTO "movies" 

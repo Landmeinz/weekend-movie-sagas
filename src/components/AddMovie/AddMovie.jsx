@@ -66,6 +66,7 @@ function AddMovie() {
                 payload: { title, poster, description }
             });
 
+
             // empty all back to default values after submit; 
             setTitle('')
             setPoster('')
@@ -81,7 +82,6 @@ function AddMovie() {
 
 
     // --- SX PROPERTIES --- //
-
 
     const sxFormBox = {
         display: 'flex',
@@ -118,8 +118,6 @@ function AddMovie() {
         <div>
             <form onSubmit={handleSubmit}>
                 <Box sx={sxFormBox}>
-                    <Button variant="contained" sx={sxButton} type="submit">
-                        <SaveOutlinedIcon fontSize='large' />ADD TO WATCH LIST</Button>
 
                     <TextField sx={sxTextField} id="outlined-basic" label="Title of Movie" variant="outlined" type="text"
                         value={title}
@@ -147,6 +145,9 @@ function AddMovie() {
                             >{genre.name}</MenuItem>
                         ))}
                     </Select>
+                    
+                    <Button variant="contained" sx={sxButton} type="submit">
+                        <SaveOutlinedIcon fontSize='large' />ADD TO WATCH LIST</Button>
                 </Box>
 
             </form>
