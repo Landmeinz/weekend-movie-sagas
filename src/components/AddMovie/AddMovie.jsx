@@ -35,14 +35,13 @@ function AddMovie() {
 
     // BUTTON to ADD MOVIE and post to the database; 
     function handleSubmit(event) {
-        console.log('CLICKED on submit new movie');
+        console.log('CLICKED on add movie');
         event.preventDefault();
 
         // make sure genre gets selected before sending off the post; 
         if(genreInput != '0'){
 
             // --- post to database from here --- //
-
 
             // empty all back to default values after submit; 
             setTitle('')

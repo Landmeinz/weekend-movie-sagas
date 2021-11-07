@@ -1,7 +1,6 @@
 
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 // --- COMPONENTS --- // 
 
@@ -15,12 +14,12 @@ function DetailsPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // grab movies and genres from the store;
+    // INVENTORY grab movies and genres from the store;
     const selectedMovie = useSelector(store => store.selectedMovie);
     const genres = useSelector(store => store.genres);
 
-    console.log('--- the genres', genres);
 
+    console.log('--- the genres', genres);
     console.log('this is selectedMovie', selectedMovie);
 
 
@@ -45,20 +44,46 @@ function DetailsPage() {
     }; // handleClick
 
 
-    // axios({
-    //     method: 'GET',
-    //     url: '/api/genre'
-    // })
-    //     .then(response => {
-    //         console.log('GET /api/genre response', response);
-    //         dispatch({
-    //             type: 'GET_FEEDBACK',
-    //             payload: response.data
-    //         })
-    //     })
-    //     .catch(error => {
-    //         console.log('GET /api/genre ERROR', error);
-    //     });
+
+    // --- SX PROPERTIES --- //
+
+    // box properties that holds our movie title and our image together; 
+    const sxPoster = {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+
+        '& > :not(style)': {
+            m: 1,
+            width: 225,
+            height: 370,
+        },
+    }; // sxPoster
+
+    // box properties that holds our movie title info;
+    const sxHeader = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '& > :not(style)': {
+            height: 35,
+            p: .5,
+        },
+    }; // sxHeader
+
+    // box properties that holds our movie description and details;
+    const sxDescription = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '& > :not(style)': {
+            p: 3,
+            width: 550,
+            height: 370,
+        },
+    }; // sxDescription
 
 
     return (
@@ -70,31 +95,10 @@ function DetailsPage() {
 
             <button onClick={() => handleClick('addMovie')}>ADD MOVIE</button>
 
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                m: 1,
-
-                '& > :not(style)': {
-                    m: .1,
-                    width: 225,
-                    height: 370,
-                },
-            }}>
-
+            <Box sx={sxPoster}>
                 <Paper elevation={2}>
-                    <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        '& > :not(style)': {
-                            height: 35,
-                            p: .5,
-                        },
-                    }}>
 
+                    <Box sx={sxHeader}>
                         <h3>{selectedMovie.title}</h3>
                     </Box>
 
@@ -102,28 +106,24 @@ function DetailsPage() {
                         src={selectedMovie.poster}
                         alt={selectedMovie.title}
                         width="200"
-                        height="275" />
+                        height="275"
+                    />
+
                 </Paper>
             </Box>
 
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                '& > :not(style)': {
-                    p: 3,
-                    width: 550,
-                    height: 370,
-                },
-            }}>
+            <Box sx={sxDescription}>
 
                 <Paper elevation={2}>
-
                     <h4>{selectedMovie.title}</h4>
-                    <p>{selectedMovie.description}</p>
-                    <p>{genres.name}</p>
 
+                    {genres.map((genre) => (
+                        <p key={genre.movie_id}>{genre.name}</p>
+                    ))}
+
+                    <p>{selectedMovie.description}</p>
+                   
+                    
                 </Paper>
 
             </Box>

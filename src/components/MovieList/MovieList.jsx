@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios'
 import './MovieList.css'
 
 // --- COMPONENTS --- // 
@@ -17,13 +18,14 @@ function MovieList() {
     const movies = useSelector(store => store.movies);
 
 
+    // on page load fetch all the movies from our database;
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
 
 
-    // BUTTON to go back to the movie list or to the add movie form; 
+    // BUTTONS to go back to the movie list or to the add movie form; 
     function handleClick(input, movie) {
         switch (input) {
 
@@ -34,6 +36,22 @@ function MovieList() {
                     type: 'SET_SELECTED_MOVIE',
                     payload: movie
                 });
+
+                axios({
+                    method: 'GET',
+                    url: `/api/genre/${movie.id}`
+                })
+                    .then(response => {
+                        console.log('GET /api/genre response', response);
+                        dispatch({
+                            type:    'SET_GENRES',
+                            payload: response.data
+                        })
+                    })
+                    .catch(error => {
+                        console.log('GET /api/genre ERROR', error);
+                    });
+
                 history.push('/details');
                 break;
 
@@ -46,9 +64,36 @@ function MovieList() {
                 break;
         }; // switch
 
-        // axios.get('/')
-
     }; // handleClick
+
+
+
+    // --- SX PROPERTIES --- //
+
+    // box properties that holds our movie title and our image together; 
+    const sxPoster = {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+
+        '& > :not(style)': {
+            m: 1,
+            width: 225,
+            height: 370,
+        },
+    }; // sxPoster
+
+    // box properties that holds our movie title info;
+    const sxHeader = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '& > :not(style)': {
+            height: 35,
+            p: .5,
+        },
+    }; // sxHeader
 
 
     return (
@@ -61,35 +106,14 @@ function MovieList() {
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-
-                            '& > :not(style)': {
-                                m: 1,
-                                width: 225,
-                                height: 370,
-                            },
-                        }}>
-
+                        <Box sx={sxPoster}>
                             <Paper
                                 elevation={2}
                                 key={movie.id}
                                 onClick={() => handleClick('dispatch', movie)}
                                 style={{ cursor: 'pointer' }} >
 
-                                <Box sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    '& > :not(style)': {
-                                        height: 35,
-                                        p: .5,
-                                    },
-                                }}>
-
+                                <Box sx={sxHeader}>
                                     <h3>{movie.title}</h3>
                                 </Box>
 
@@ -97,9 +121,10 @@ function MovieList() {
                                     src={movie.poster}
                                     alt={movie.title}
                                     width="200"
-                                    height="275" />
-                            </Paper>
+                                    height="275"
+                                />
 
+                            </Paper>
                         </Box>
                     );
                 })}
