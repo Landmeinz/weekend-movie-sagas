@@ -51,6 +51,35 @@ function MovieList() {
     }; // handleClick
 
 
+    
+    // --- SX PROPERTIES --- //
+
+    // box properties that holds our movie title and our image together; 
+    const sxPoster = {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+
+        '& > :not(style)': {
+            m: 1,
+            width: 225,
+            height: 370,
+        },
+    }; // sxPoster
+
+    // box properties that holds our movie title info;
+    const sxHeader = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '& > :not(style)': {
+            height: 35,
+            p: .5,
+        },
+    }; // sxHeader
+
+
     return (
         <main>
 
@@ -61,35 +90,14 @@ function MovieList() {
             <section className="movies">
                 {movies.map(movie => {
                     return (
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-
-                            '& > :not(style)': {
-                                m: 1,
-                                width: 225,
-                                height: 370,
-                            },
-                        }}>
-
+                        <Box sx={sxPoster}>
                             <Paper
                                 elevation={2}
                                 key={movie.id}
                                 onClick={() => handleClick('dispatch', movie)}
                                 style={{ cursor: 'pointer' }} >
 
-                                <Box sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    '& > :not(style)': {
-                                        height: 35,
-                                        p: .5,
-                                    },
-                                }}>
-
+                                <Box sx={sxHeader}>
                                     <h3>{movie.title}</h3>
                                 </Box>
 
@@ -97,9 +105,10 @@ function MovieList() {
                                     src={movie.poster}
                                     alt={movie.title}
                                     width="200"
-                                    height="275" />
-                            </Paper>
+                                    height="275"
+                                />
 
+                            </Paper>
                         </Box>
                     );
                 })}
