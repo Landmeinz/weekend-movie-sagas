@@ -4,6 +4,9 @@ MOVIE SAGAS
 
 Duration: Weekend Challenge
 
+<img width="1301" alt="Screen Shot 2021-11-14 at 9 54 58 PM" src="https://user-images.githubusercontent.com/85810386/147122281-5478b089-5a34-4d11-b41f-0401272e4a22.png">
+
+<img width="952" alt="Screen Shot 2021-11-14 at 9 55 14 PM" src="https://user-images.githubusercontent.com/85810386/147122329-99c39a39-d058-4152-b487-10f43ce171c3.png">
 
 ## Description
 
