@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 
 function Header() {
 
+    // box that contains the header; not sure why i took it out of the h1 tag; 
     const sxHeader = {
         display: 'flex',
         justifyContent: 'center',

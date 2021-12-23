@@ -38,6 +38,7 @@ router.post('/', (req, res) => {
   const values = [req.body.title, req.body.poster, req.body.description];
 
 
+  
   // FIRST QUERY MAKES MOVIE
   pool.query(insertMovieQuery, values)
     .then(result => {

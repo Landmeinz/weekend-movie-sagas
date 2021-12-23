@@ -10,9 +10,9 @@ router.get('/', (req, res) => {
   // Add query to get all genres
 
   const queryText = `
-  SELECT 	  *
-  FROM 	    "genres"
-  ORDER BY  "name"; ` ;
+    SELECT 	  *
+    FROM 	    "genres"
+    ORDER BY  "name"; ` ;
 
   pool.query(queryText)
     .then(result => {
@@ -31,14 +31,15 @@ router.get('/:id', (req, res) => {
   // Add query to get all genres
   const movieId = req.params.id
 
+  // REMEMBER to sanitize the the id by using $1; anything coming from the DOM needs to be sanitized on GET or POST; 
   const queryText = `
-  SELECT 	"name", "movies_genres"."movie_id"
-  FROM 	  "genres"
-  JOIN 	  "movies_genres"
-  ON  	  "genres"."id" = "movies_genres"."genre_id"
-  WHERE 	"movies_genres"."movie_id" = ${movieId};`;
+    SELECT 	"name", "movies_genres"."movie_id"
+    FROM 	  "genres"
+    JOIN 	  "movies_genres"
+    ON  	  "genres"."id" = "movies_genres"."genre_id"
+    WHERE 	"movies_genres"."movie_id" = $1;`;
 
-  pool.query(queryText)
+  pool.query(queryText, [movieId])
     .then(result => {
       console.log('the pool.query result GET genres', result.rows);
       res.send(result.rows);

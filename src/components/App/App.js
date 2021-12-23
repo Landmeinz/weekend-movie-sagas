@@ -48,9 +48,8 @@ function App() {
 
       <ThemeProvider theme={theme}>
         <Typography sx={sxType} mt={2}>
-
-
           <Router>
+            
             <Container sx={sxHeaderContainer}>
               <Header />
               <NavBar />
@@ -60,12 +59,10 @@ function App() {
               <MovieList />
             </Route>
 
-            {/* Details page */}
             <Route path="/details" >
               <DetailsPage />
             </Route>
 
-            {/* Add Movie page */}
             <Route path="/addMovie" >
               <AddMovie />
             </Route>

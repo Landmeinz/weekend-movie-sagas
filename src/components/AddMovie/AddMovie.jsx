@@ -145,7 +145,7 @@ function AddMovie() {
                             >{genre.name}</MenuItem>
                         ))}
                     </Select>
-                    
+
                     <Button variant="contained" sx={sxButton} type="submit">
                         <SaveOutlinedIcon fontSize='large' />ADD TO WATCH LIST</Button>
                 </Box>

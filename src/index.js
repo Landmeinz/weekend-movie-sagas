@@ -14,6 +14,7 @@ import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
+// --- SAGAS --- //
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -77,7 +78,7 @@ const movies = (state = [], action) => {
     }
 }; // sagaMiddleware
 
-// Used to store the movie genres
+// Used to store the selected movie genres;
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
@@ -89,6 +90,7 @@ const genres = (state = [], action) => {
     }
 }; // genres
 
+// storing all of the movie genres pulled from the database;
 const allGenres = (state = [], action) => {
     switch (action.type) {
         case 'ALL_GENRES':
@@ -100,7 +102,8 @@ const allGenres = (state = [], action) => {
     }
 }; // allGenres
 
-const selectedMovie = (state = [], action) => {
+// use as object as the starting state so that it matches our data type; movie list is an array of objects;
+const selectedMovie = (state = {}, action) => {
     switch (action.type) {
         case 'SET_SELECTED_MOVIE':
             console.log('this is action.payload of selectedMovie', selectedMovie);

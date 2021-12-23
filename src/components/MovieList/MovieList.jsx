@@ -8,7 +8,6 @@ import './MovieList.css'
 // --- MUI --- //
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 
 function MovieList() {
 
